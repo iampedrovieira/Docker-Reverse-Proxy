@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  web-service-1:
+    container_name: web-service-1
+    image: web-service-1:latest
+    restart: always
+    environment:
+      VIRTUAL_HOST: webservice1.iampedrovieira.pt
+    ports:
+      - 3000
+
+  web-service-2:
+    container_name: web-service-2
+    image: web-service-2:latest
+    restart: always
+    environment:
+      VIRTUAL_HOST: webservice2.iampedrovieira.pt
+    ports:
+      - 2000
